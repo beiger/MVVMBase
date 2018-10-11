@@ -1,0 +1,7 @@
+<resources>
+	<string name="app_name">MVVMBase</string>
+
+	<string name="refresh_at">更新于</string>
+	<string name="network_useless">网络异常，请点击重试</string>
+	<string name="no_data">无数据</string>
+</resources>

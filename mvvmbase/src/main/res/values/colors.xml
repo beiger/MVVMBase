@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">#5687cc</color>
+	<color name="colorPrimaryDark">#00000000</color>
+	<color name="colorAccent">#5687cc</color>
+	<color name="color1">#FF9C00</color>
+	<color name="color2">#7BB31A</color>
+	<color name="color3">#EEDB00</color>
+	<color name="color4">#673AB7</color>
+	<color name="color5">#512DA8</color>
+	<color name="color6">#FF4081</color>
+	<color name="color7">#8B88FF</color>
+	<color name="color8">#FF6100</color>
+
+	<color name="color9">#ffffff</color>                <!--背景色/按钮字体-->
+	<color name="color10">#f8f8f8</color>        <!--状态导航栏背景色-->
+	<color name="color11">#f2f2f2</color>        <!--背景色-->
+	<color name="color12">#eeeeee</color>        <!--二级分割线-->
+	<color name="color13">#dddddd</color>        <!--分割线-->
+	<color name="color14">#999999</color>        <!--次文字/标题说明/时间 等-->
+	<color name="color15">#666666</color>        <!--次文字-->
+	<color name="color16">#333333</color>        <!--文字/导航/title1-->
+	<color name="color17">#00aaff</color>        <!--文字/标准蓝/文字高亮-->
+	<color name="color18">#ffab19</color>        <!--文字/标准橙/文字高亮-->
+	<color name="color19">#fb7e00</color>        <!--按钮/选择气泡/文字高亮-->
+	<color name="color20">#5ed125</color>        <!--文字/标准绿-->
+	<color name="color21">#ff4343</color>        <!--气泡提示文字/标准红-->
+	<color name="color22">#de1e7c</color>        <!--分类提示文字-->
+
+	<color name="waveview_border">#448B88FF</color>
+
+
+	<color name="bg_login_disabled">#445687cc</color>
+	<color name="bg_login_pressed">#5064C1</color>
+	<color name="bg_login_selected">#5064C1</color>
+	<color name="bg_login_activated">#5687cc</color>
+	<color name="bg_login_normal">#5687cc</color>
+
+	<color name="bg_submit_disabled">#44ffd200</color>
+	<color name="bg_submit_pressed">#ff9c00</color>
+	<color name="bg_submit_selected">#ff9c00</color>
+	<color name="bg_submit_activated">#ffd200</color>
+	<color name="bg_submit_normal">#ffd200</color>
+
+	<color name="colorTextTitle">#333333</color>
+	<color name="colorTextSubTitle">#555555</color>
+	<color name="colorTextContent">#666666</color>
+
+	<color name="white">#ffffff</color>
+	<color name="divide_color">#08000000</color>
+
+	<color name="transparent">#00000000</color>
+	<color name="gray_cc">#888888</color>
+
+	<color name="horvoice_text_color">#ff9c00</color>
+	<color name="color_666666">#666666</color>
+	<color name="black_color_aa">#aa000000</color>
+	<color name="bg_black_06">#06000000</color>
+	<color name="bg_white_bb">#bbffffff</color>
+	<color name="searchview_bg">#ffe6e6e6</color>
+
+	<color name="black_overlay">#66000000</color>
+</resources>
