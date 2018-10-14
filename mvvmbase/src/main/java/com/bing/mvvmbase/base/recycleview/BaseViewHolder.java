@@ -11,4 +11,7 @@ public class BaseViewHolder<DB extends ViewDataBinding> extends RecyclerView.Vie
 		mBinding = binding;
 	}
 
+	public DB getBinding() {
+		return mBinding;
+	}
 }

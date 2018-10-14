@@ -32,6 +32,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
@@ -116,6 +117,7 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 		mRecyclerView.setLayoutManager(getLayoutManager());
 		mRecyclerView.setItemAnimator(getItemAnimator());
 		initAdapter();
+		mRecyclerView.setAdapter(mAdapter);
 	}
 
 	protected abstract RecyclerView getRecyclerView();
@@ -125,8 +127,8 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 		return new DefaultItemAnimator();
 	}
 	protected abstract void initAdapter();
-	protected abstract LiveData<Status> getNetworkState();
-	protected abstract LiveData<Status> getRefreshState();
+	protected abstract MutableLiveData<Status> getNetworkState();
+	protected abstract MutableLiveData<Status> getRefreshState();
 	protected abstract LiveData<List<T>> getData();
 
 	protected abstract void handleArguments();
@@ -168,6 +170,9 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 			@Override
 			public void onChanged(List<T> list) {
 				mAdapter.setData(list);
+				if (list == null || list.size() == 0) {
+					getNetworkState().setValue(Status.NONE);
+				}
 			}
 		});
 		getRefreshState().observe(this, new Observer<Status>() {

@@ -14,8 +14,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class BaseRecycleViewAdapter<T, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
-	private List<T> mData = new ArrayList<>();
+	protected List<T> mData = new ArrayList<>();
 	protected OnClickListener mListener;
+
+	public List<T> getData() {
+		return mData;
+	}
 
 	@NonNull
 	@Override

@@ -9,12 +9,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import androidx.databinding.BindingAdapter;
 
 public class BindingAdapters {
-	@BindingAdapter("bind:visibleGone")
+	@BindingAdapter("visibleGone")
 	public static void showHide(View view, boolean show) {
 		view.setVisibility(show ? View.VISIBLE : View.GONE);
 	}
 
-	@BindingAdapter("bind:img_url")
+	@BindingAdapter("img_url")
 	public static void showImg(ImageView iv, String url) {
 		GlideApp.with(iv.getContext()).load(url).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(iv);
 	}
