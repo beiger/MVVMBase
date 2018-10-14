@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.paging.PagedList;
 import androidx.paging.PagedListAdapter;
@@ -90,6 +91,7 @@ public abstract class BasePageFragment<AD extends PagedListAdapter, T> extends B
 		mRecyclerView.setLayoutManager(getLayoutManager());
 		mRecyclerView.setItemAnimator(getItemAnimator());
 		initAdapter();
+		mRecyclerView.setAdapter(mAdapter);
 	}
 
 	protected abstract RecyclerView getRecyclerView();
@@ -99,8 +101,8 @@ public abstract class BasePageFragment<AD extends PagedListAdapter, T> extends B
 		return new DefaultItemAnimator();
 	}
 	protected abstract void initAdapter();
-	protected abstract LiveData<Status> getNetworkState();
-	protected abstract LiveData<Status> getRefreshState();
+	protected abstract MutableLiveData<Status> getNetworkState();
+	protected abstract MutableLiveData<Status> getRefreshState();
 	protected abstract LiveData<PagedList<T>> getData();
 
 	@Override
@@ -109,6 +111,11 @@ public abstract class BasePageFragment<AD extends PagedListAdapter, T> extends B
 			@Override
 			public void onChanged(PagedList<T> data) {
 				mAdapter.submitList(data);
+				if (data == null || data.size() == 0) {
+					getNetworkState().setValue(Status.NONE);
+				} else {
+					getNetworkState().setValue(Status.SUCCESS);
+				}
 			}
 		});
 		getNetworkState().observe(this, new Observer<Status>() {
