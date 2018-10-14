@@ -1,3 +1,5 @@
 <resources>
+	<style name="AppBase" parent="Theme.AppCompat.Light.NoActionBar">
 
+	</style>
 </resources>

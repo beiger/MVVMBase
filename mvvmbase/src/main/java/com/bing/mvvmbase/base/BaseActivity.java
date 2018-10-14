@@ -18,7 +18,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		onCreateFirst();
-		mViewModel = initViewModel();
+		initViewModel();
 		getLifecycle().addObserver(mViewModel);
 		mBinding = DataBindingUtil.setContentView(this, layoutId());
 		bindAndObserve();
@@ -28,7 +28,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding, VM extends BaseVi
 
 	}
 
-	protected abstract VM initViewModel();
+	protected abstract void initViewModel();
 	protected abstract int layoutId();
 	protected abstract void bindAndObserve();
 
