@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bing.mvvmbase.R;
-import com.bing.mvvmbase.base.BaseFragment;
+import com.bing.mvvmbase.base.BaseViewModel;
 import com.bing.mvvmbase.module.loadingpage.LoadingCallback;
 import com.bing.mvvmbase.module.loadingpage.NetErrorCallback;
 import com.bing.mvvmbase.module.loadingpage.NoDataCallback;
@@ -29,16 +29,32 @@ import java.util.Random;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
+import io.reactivex.disposables.CompositeDisposable;
 
-public abstract class BaseRecycleViewFragment<AD extends BaseRecycleViewAdapter, T> extends BaseFragment {
+public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM extends BaseViewModel, AVM extends BaseViewModel, AD extends BaseRecycleViewAdapter, T> extends Fragment {
+	protected DB mBinding;
+	protected VM mViewModel;
+	protected AVM mActivityViewModel;
+	protected CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+
 	protected RecyclerView mRecyclerView;
 	protected RefreshLayout mRefreshLayout;
 	protected AD mAdapter;
 	protected LoadService mLoadService;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (getArguments() != null) {
+			handleArguments();
+		}
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +64,17 @@ public abstract class BaseRecycleViewFragment<AD extends BaseRecycleViewAdapter,
 	}
 
 	@Override
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		initActivityViewModel();
+		initViewModel();
+		getLifecycle().addObserver(mViewModel);
+		bindAndObserve();
+	}
+
+	/**
+	 * 此时还没有viewModel
+	 */
 	protected void initView() {
 		mLoadService = LoadSir.getDefault().register(mBinding.getRoot(), new Callback.OnReloadListener() {
 			@Override
@@ -102,7 +129,12 @@ public abstract class BaseRecycleViewFragment<AD extends BaseRecycleViewAdapter,
 	protected abstract LiveData<Status> getRefreshState();
 	protected abstract LiveData<List<T>> getData();
 
-	@Override
+	protected abstract void handleArguments();
+	protected abstract int layoutId();
+
+	protected abstract void initActivityViewModel();
+	protected abstract void initViewModel();
+
 	protected void bindAndObserve() {
 		getNetworkState().observe(this, new Observer<Status>() {
 			@Override

@@ -35,7 +35,6 @@ public abstract class BaseRecycleViewAdapter<T, VH extends BaseViewHolder> exten
 	 */
 	@Override
 	public void onBindViewHolder(@NonNull VH holder, final int position) {
-		bindData(holder, position);
 		holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -44,6 +43,7 @@ public abstract class BaseRecycleViewAdapter<T, VH extends BaseViewHolder> exten
 				}
 			}
 		});
+		bindData(holder, position);
 		holder.mBinding.executePendingBindings();
 	}
 

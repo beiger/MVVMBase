@@ -4,7 +4,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class BaseViewHolder<DB extends ViewDataBinding> extends RecyclerView.ViewHolder {
-	final DB mBinding;
+	protected final DB mBinding;
 
 	public BaseViewHolder(DB binding) {
 		super(binding.getRoot());
