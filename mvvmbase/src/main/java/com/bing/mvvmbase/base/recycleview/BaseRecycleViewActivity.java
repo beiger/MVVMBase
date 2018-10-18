@@ -101,6 +101,7 @@ public abstract class BaseRecycleViewActivity<DB extends ViewDataBinding, VM ext
 		mRecyclerView.setLayoutManager(getLayoutManager());
 		mRecyclerView.setItemAnimator(getItemAnimator());
 		initAdapter();
+		mRecyclerView.setAdapter(mAdapter);
 	}
 
 	protected abstract RecyclerView getRecyclerView();
