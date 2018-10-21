@@ -108,7 +108,6 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 		int delta = new Random().nextInt(7 * 24 * 60 * 60 * 1000);
 		ClassicsHeader classicsHeader = (ClassicsHeader) mRefreshLayout.getRefreshHeader();
 		classicsHeader.setLastUpdateTime(new Date(System.currentTimeMillis() - delta));
-		classicsHeader.setTimeFormat(new SimpleDateFormat(getString(R.string.refresh_at) + " MM-dd HH:mm", Locale.getDefault()));
 		classicsHeader.setTimeFormat(new DynamicTimeFormat(getString(R.string.refresh_at) + " %s"));
 	}
 
