@@ -9,4 +9,4 @@ maven {url "https://jitpack.io"}
 }
 }
 
-implementation 'com.github.beiger:MVVMBase:0.02'
+implementation 'com.github.beiger:MVVMBase:0.06'
