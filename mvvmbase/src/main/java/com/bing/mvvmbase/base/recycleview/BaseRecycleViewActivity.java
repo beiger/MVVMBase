@@ -89,9 +89,7 @@ public abstract class BaseRecycleViewActivity<DB extends ViewDataBinding, VM ext
 	protected abstract void refresh(@NonNull RefreshLayout refreshLayout);
 
 	protected void initRefreshHeader() {
-		int delta = new Random().nextInt(7 * 24 * 60 * 60 * 1000);
 		ClassicsHeader classicsHeader = (ClassicsHeader) mRefreshLayout.getRefreshHeader();
-		classicsHeader.setLastUpdateTime(new Date(System.currentTimeMillis() - delta));
 		classicsHeader.setTimeFormat(new DynamicTimeFormat(getString(R.string.refresh_at) + " %s"));
 	}
 

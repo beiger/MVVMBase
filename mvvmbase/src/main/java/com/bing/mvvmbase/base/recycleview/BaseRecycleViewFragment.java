@@ -20,11 +20,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -105,9 +101,7 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 	protected abstract void refresh(@NonNull RefreshLayout refreshLayout);
 
 	protected void initRefreshHeader() {
-		int delta = new Random().nextInt(7 * 24 * 60 * 60 * 1000);
 		ClassicsHeader classicsHeader = (ClassicsHeader) mRefreshLayout.getRefreshHeader();
-		classicsHeader.setLastUpdateTime(new Date(System.currentTimeMillis() - delta));
 		classicsHeader.setTimeFormat(new DynamicTimeFormat(getString(R.string.refresh_at) + " %s"));
 	}
 
