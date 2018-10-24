@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -26,4 +27,34 @@ public class BaseViewModel extends AndroidViewModel implements DefaultLifecycleO
 		super.onCleared();
 		mCompositeDisposable.dispose();
 	}
+
+        @Override
+        public void onCreate(@NonNull LifecycleOwner owner) {
+                
+        }
+
+        @Override
+        public void onResume(@NonNull LifecycleOwner owner) {
+
+        }
+
+        @Override
+        public void onStart(@NonNull LifecycleOwner owner) {
+
+        }
+
+        @Override
+        public void onPause(@NonNull LifecycleOwner owner) {
+
+        }
+
+        @Override
+        public void onStop(@NonNull LifecycleOwner owner) {
+
+        }
+
+        @Override
+        public void onDestroy(@NonNull LifecycleOwner owner) {
+
+        }
 }
