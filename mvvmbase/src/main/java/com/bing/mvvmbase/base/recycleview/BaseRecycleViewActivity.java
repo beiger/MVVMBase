@@ -37,7 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BaseRecycleViewActivity<DB extends ViewDataBinding, VM extends BaseViewModel, AD extends BaseRecycleViewAdapter, T> extends AppCompatActivity {
+public abstract class BaseRecycleViewActivity<DB extends ViewDataBinding, VM extends BaseViewModel, AD extends BaseRecycleViewAdapter, T> extends AppCompatActivity implements View.OnClickListener {
 	protected DB mBinding;
 	protected VM mViewModel;
 	protected CompositeDisposable mCompositeDisposable = new CompositeDisposable();
@@ -158,13 +158,24 @@ public abstract class BaseRecycleViewActivity<DB extends ViewDataBinding, VM ext
 		});
 	}
 
+	protected void addOnClickListener(@NonNull View... views) {
+		for (View view : views) {
+			view.setOnClickListener(this);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+
+	}
+
 	protected void addDisposable(Disposable disposable) {
 		mCompositeDisposable.add(disposable);
 	}
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		mCompositeDisposable.dispose();
+		super.onDestroy();
 	}
 }

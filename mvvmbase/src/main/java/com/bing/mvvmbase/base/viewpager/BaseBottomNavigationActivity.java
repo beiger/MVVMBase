@@ -2,6 +2,7 @@ package com.bing.mvvmbase.base.viewpager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.bing.mvvmbase.base.BaseViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,7 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BaseBottomNavigationActivity<DB extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity {
+public abstract class BaseBottomNavigationActivity<DB extends ViewDataBinding, VM extends BaseViewModel> extends AppCompatActivity implements View.OnClickListener {
 	protected DB mBinding;
 	protected VM mViewModel;
 	protected CompositeDisposable mCompositeDisposable = new CompositeDisposable();
@@ -56,14 +57,25 @@ public abstract class BaseBottomNavigationActivity<DB extends ViewDataBinding, V
 	protected abstract List<Fragment> initFragments();
 	protected abstract void bindAndObserve();
 
+	protected void addOnClickListener(@NonNull View... views) {
+		for (View view : views) {
+			view.setOnClickListener(this);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+
+	}
+
 	protected void addDisposable(Disposable disposable) {
 		mCompositeDisposable.add(disposable);
 	}
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		mCompositeDisposable.dispose();
+		super.onDestroy();
 	}
 
 

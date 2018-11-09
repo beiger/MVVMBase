@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.bing.mvvmbase.R;
+import com.bing.mvvmbase.base.BaseViewModel;
 import com.bing.mvvmbase.module.loadingpage.LoadingCallback;
 import com.bing.mvvmbase.module.loadingpage.NetErrorCallback;
 import com.bing.mvvmbase.module.loadingpage.NoDataCallback;
@@ -27,7 +28,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.paging.PagedList;
@@ -37,7 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BasePageActivity<DB extends ViewDataBinding, VM extends AndroidViewModel, AD extends PagedListAdapter, T> extends AppCompatActivity {
+public abstract class BasePageActivity<DB extends ViewDataBinding, VM extends BaseViewModel, AD extends PagedListAdapter, T> extends AppCompatActivity implements View.OnClickListener {
 	protected DB mBinding;
 	protected VM mViewModel;
 	protected CompositeDisposable mCompositeDisposable = new CompositeDisposable();
@@ -51,6 +51,7 @@ public abstract class BasePageActivity<DB extends ViewDataBinding, VM extends An
 		super.onCreate(savedInstanceState);
 		onCreateFirst();
 		initViewModel();
+		getLifecycle().addObserver(mViewModel);
 		mBinding = DataBindingUtil.setContentView(this, layoutId());
 		mLoadService = LoadSir.getDefault().register(getRefreshLayout(), new Callback.OnReloadListener() {
 			@Override
@@ -159,13 +160,24 @@ public abstract class BasePageActivity<DB extends ViewDataBinding, VM extends An
 		});
 	}
 
+	protected void addOnClickListener(@NonNull View... views) {
+		for (View view : views) {
+			view.setOnClickListener(this);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+
+	}
+
 	protected void addDisposable(Disposable disposable) {
 		mCompositeDisposable.add(disposable);
 	}
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		mCompositeDisposable.dispose();
+		super.onDestroy();
 	}
 }

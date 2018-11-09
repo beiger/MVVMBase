@@ -18,14 +18,14 @@ public class BaseViewModel extends AndroidViewModel implements DefaultLifecycleO
 		mAppExecutors = ((BaseApplication) application).getAppExecutors();
 	}
 
-	protected void addDisposable(Disposable disposable) {
+	public void addDisposable(Disposable disposable) {
 		mCompositeDisposable.add(disposable);
 	}
 
 	@Override
 	protected void onCleared() {
-		super.onCleared();
 		mCompositeDisposable.dispose();
+		super.onCleared();
 	}
 
         @Override

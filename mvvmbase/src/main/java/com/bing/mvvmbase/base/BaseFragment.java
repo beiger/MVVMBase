@@ -3,18 +3,20 @@ package com.bing.mvvmbase.base;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class BaseFragment<DB extends ViewDataBinding, VM extends BaseViewModel, AVM extends BaseViewModel> extends Fragment {
+public abstract class BaseFragment<DB extends ViewDataBinding, VM extends BaseViewModel, AVM extends BaseViewModel> extends Fragment implements View.OnClickListener {
 	protected DB mBinding;
 	protected VM mViewModel;
 	protected AVM mActivityViewModel;
@@ -59,4 +61,25 @@ public abstract class BaseFragment<DB extends ViewDataBinding, VM extends BaseVi
 	protected abstract void initActivityViewModel();
 	protected abstract void initViewModel();
 	protected abstract void bindAndObserve();
+
+	private void addOnClickListener(@NonNull View... views) {
+		for (View view : views) {
+			view.setOnClickListener(this);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+
+	}
+
+	public void addDisposable(Disposable disposable) {
+		mCompositeDisposable.add(disposable);
+	}
+
+	@Override
+	public void onDestroy() {
+		mCompositeDisposable.dispose();
+		super.onDestroy();
+	}
 }

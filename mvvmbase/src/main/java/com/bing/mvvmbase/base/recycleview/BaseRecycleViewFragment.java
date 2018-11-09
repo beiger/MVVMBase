@@ -33,8 +33,9 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
-public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM extends BaseViewModel, AVM extends BaseViewModel, AD extends BaseRecycleViewAdapter, T> extends Fragment {
+public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM extends BaseViewModel, AVM extends BaseViewModel, AD extends BaseRecycleViewAdapter, T> extends Fragment implements View.OnClickListener {
 	protected DB mBinding;
 	protected VM mViewModel;
 	protected AVM mActivityViewModel;
@@ -178,5 +179,26 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 				}
 			}
 		});
+	}
+
+	protected void addOnClickListener(@NonNull View... views) {
+		for (View view : views) {
+			view.setOnClickListener(this);
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+
+	}
+
+	protected void addDisposable(Disposable disposable) {
+		mCompositeDisposable.add(disposable);
+	}
+
+	@Override
+	public void onDestroy() {
+		mCompositeDisposable.dispose();
+		super.onDestroy();
 	}
 }

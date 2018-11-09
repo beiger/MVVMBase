@@ -1,5 +1,7 @@
 package com.bing.mvvmbase;
 
+import android.view.View;
+
 import com.bing.mvvmbase.base.BaseActivity;
 import com.bing.mvvmbase.databinding.ActivityMainBinding;
 
@@ -18,6 +20,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
 	@Override
 	protected void bindAndObserve() {
+
+	}
+
+	@Override
+	public void onClick(View v) {
 
 	}
 }
