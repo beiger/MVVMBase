@@ -4,12 +4,12 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.ScrollView;
 
 import androidx.core.view.ViewCompat;
+import androidx.core.widget.NestedScrollView;
 
-public class ScaleScrollView extends ScrollView {
-    public ScaleScrollView(Context context, AttributeSet attrs) {
+public class ScaleNestedScrollView extends NestedScrollView {
+    public ScaleNestedScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

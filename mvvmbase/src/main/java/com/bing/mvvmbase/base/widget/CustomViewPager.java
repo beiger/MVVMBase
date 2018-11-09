@@ -6,6 +6,9 @@ import android.view.MotionEvent;
 
 import androidx.viewpager.widget.ViewPager;
 
+/**
+ * 可以开启关闭是否滑动
+ */
 public class CustomViewPager extends ViewPager {
 	private boolean isCanScroll = false;
 

@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 /**
  * 动态时间格式化
  */
-
 public class DynamicTimeFormat extends SimpleDateFormat {
 
 	private static Locale locale = Locale.CHINA;

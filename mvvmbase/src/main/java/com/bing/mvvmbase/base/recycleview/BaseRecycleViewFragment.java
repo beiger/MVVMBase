@@ -20,6 +20,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 
 	protected RecyclerView mRecyclerView;
 	protected RefreshLayout mRefreshLayout;
+	protected ClassicsHeader mClassicsHeader;
 	protected AD mAdapter;
 	protected LoadService mLoadService;
 
@@ -102,8 +104,8 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 	protected abstract void refresh(@NonNull RefreshLayout refreshLayout);
 
 	protected void initRefreshHeader() {
-		ClassicsHeader classicsHeader = (ClassicsHeader) mRefreshLayout.getRefreshHeader();
-		classicsHeader.setTimeFormat(new DynamicTimeFormat(getString(R.string.refresh_at) + " %s"));
+		mClassicsHeader = (ClassicsHeader) mRefreshLayout.getRefreshHeader();
+		mClassicsHeader.setTimeFormat(new DynamicTimeFormat(getString(R.string.refresh_at) + " %s"));
 	}
 
 	protected void initRecycleView() {
@@ -176,6 +178,7 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 			public void onChanged(Status status) {
 				if (status != Status.LOADING) {
 					mRefreshLayout.finishRefresh(status == Status.SUCCESS);
+					mClassicsHeader.setLastUpdateTime(new Date(System.currentTimeMillis()));
 				}
 			}
 		});

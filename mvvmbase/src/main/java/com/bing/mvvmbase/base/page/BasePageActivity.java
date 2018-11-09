@@ -18,10 +18,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +40,7 @@ public abstract class BasePageActivity<DB extends ViewDataBinding, VM extends Ba
 	protected CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 	protected RecyclerView mRecyclerView;
 	protected RefreshLayout mRefreshLayout;
+	protected ClassicsHeader mClassicsHeader;
 	protected AD mAdapter;
 	protected LoadService mLoadService;
 
@@ -89,11 +87,8 @@ public abstract class BasePageActivity<DB extends ViewDataBinding, VM extends Ba
 	protected abstract void refresh(@NonNull RefreshLayout refreshLayout);
 
 	protected void initRefreshHeader() {
-		int delta = new Random().nextInt(7 * 24 * 60 * 60 * 1000);
-		ClassicsHeader classicsHeader = (ClassicsHeader) mRefreshLayout.getRefreshHeader();
-		classicsHeader.setLastUpdateTime(new Date(System.currentTimeMillis() - delta));
-		classicsHeader.setTimeFormat(new SimpleDateFormat(getString(R.string.refresh_at) + " MM-dd HH:mm", Locale.getDefault()));
-		classicsHeader.setTimeFormat(new DynamicTimeFormat(getString(R.string.refresh_at) + " %s"));
+		mClassicsHeader = (ClassicsHeader) mRefreshLayout.getRefreshHeader();
+		mClassicsHeader.setTimeFormat(new DynamicTimeFormat(getString(R.string.refresh_at) + " %s"));
 	}
 
 	protected void initRecycleView() {
@@ -155,6 +150,7 @@ public abstract class BasePageActivity<DB extends ViewDataBinding, VM extends Ba
 			public void onChanged(Status status) {
 				if (status != Status.LOADING) {
 					mRefreshLayout.finishRefresh(status == Status.SUCCESS);
+					mClassicsHeader.setLastUpdateTime(new Date(System.currentTimeMillis()));
 				}
 			}
 		});

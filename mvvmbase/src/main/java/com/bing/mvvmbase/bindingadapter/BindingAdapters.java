@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bing.mvvmbase.module.glide.GlideApp;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import androidx.databinding.BindingAdapter;
 
@@ -16,6 +15,6 @@ public class BindingAdapters {
 
 	@BindingAdapter("img_url")
 	public static void showImg(ImageView iv, String url) {
-		GlideApp.with(iv.getContext()).load(url).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(iv);
+		GlideApp.with(iv.getContext()).load(url).into(iv);
 	}
 }
