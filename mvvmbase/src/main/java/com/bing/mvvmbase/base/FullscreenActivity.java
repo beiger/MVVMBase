@@ -13,7 +13,9 @@ import com.bing.mvvmbase.R;
 
 /**
  * 沉浸式acitivity模板
- * 注意：theme里不要设置 android:windowTranslucentStatus=true,也不要设置fitSystemWindow属性
+ * 注意：
+ * 1. 如果使用mStatusbarView， theme里不要设置 android:windowTranslucentStatus=true,也不要设置fitSystemWindow属性;
+ * 2. 如果不使用mStatusbarView， 可以设置fitSystemWindow=true，然后设置getWindow().setStatusBarColor(Color)为需要的颜色;
  */
 public class FullscreenActivity extends AppCompatActivity {
 	private View mStatusbarView;
@@ -74,6 +76,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
 	/**
 	 * 调整状态栏字体为黑色，>23
+	 * 可以和沉浸式状态栏一下设置完
 	 */
 	private void changeStatusBarTextColor(boolean isBlack) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
