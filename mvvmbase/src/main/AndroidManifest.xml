@@ -3,8 +3,10 @@
 	package="com.bing.mvvmbase">
 
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 	<application>
-		<activity android:name=".base.BaseActivity"></activity>
+		<activity android:name=".FlyActivity"></activity>
+		<activity android:name=".base.BaseActivity" />
 	</application>
 
 </manifest>
