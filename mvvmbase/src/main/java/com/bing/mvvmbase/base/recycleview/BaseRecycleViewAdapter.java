@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bing.mvvmbase.base.IsSame;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public abstract class BaseRecycleViewAdapter<T, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class BaseRecycleViewAdapter<T extends IsSame, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
 	protected List<T> mData = new ArrayList<>();
 	protected OnClickListener mListener;
 
@@ -79,12 +81,12 @@ public abstract class BaseRecycleViewAdapter<T, VH extends BaseViewHolder> exten
 
 				@Override
 				public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-					return mData.get(oldItemPosition).equals(data.get(newItemPosition));
+					return mData.get(oldItemPosition).itemSame(data.get(newItemPosition));
 				}
 
 				@Override
 				public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-					return mData.get(oldItemPosition).equals(data.get(newItemPosition));
+					return mData.get(oldItemPosition).contentSame(data.get(newItemPosition));
 				}
 			});
 			mData = data;

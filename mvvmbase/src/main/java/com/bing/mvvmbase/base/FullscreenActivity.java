@@ -16,6 +16,7 @@ import com.bing.mvvmbase.R;
  * 注意：
  * 1. 如果使用mStatusbarView， theme里不要设置 android:windowTranslucentStatus=true,也不要设置fitSystemWindow属性;
  * 2. 如果不使用mStatusbarView， 可以设置fitSystemWindow=true，然后设置getWindow().setStatusBarColor(Color)为需要的颜色;
+ * 3. 也可以给Activityy设置背景，调整toolbar高度，并设置padding
  */
 public class FullscreenActivity extends AppCompatActivity {
 	private View mStatusbarView;

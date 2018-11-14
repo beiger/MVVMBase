@@ -4,13 +4,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bing.mvvmbase.base.IsSame;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
-public abstract class BasePagedListAdapter<T, VH extends BaseViewHolder> extends PagedListAdapter<T, VH> {
+public abstract class BasePagedListAdapter<T extends IsSame, VH extends BaseViewHolder> extends PagedListAdapter<T, VH> {
 
 	private OnClickListener mListener;
 
@@ -18,12 +20,12 @@ public abstract class BasePagedListAdapter<T, VH extends BaseViewHolder> extends
 		super(new DiffUtil.ItemCallback<T>() {
 			@Override
 			public boolean areItemsTheSame(@NonNull T oldItem, @NonNull T newItem) {
-				return oldItem.equals(newItem);
+				return oldItem.itemSame(newItem);
 			}
 
 			@Override
 			public boolean areContentsTheSame(@NonNull T oldItem, @NonNull T newItem) {
-				return oldItem.equals(newItem);
+				return oldItem.contentSame(newItem);
 			}
 		});
 		mListener = listener;
