@@ -166,11 +166,6 @@ public abstract class BaseRecycleViewFragment<DB extends ViewDataBinding, VM ext
 			@Override
 			public void onChanged(List<T> list) {
 				mAdapter.setData(list);
-				if (list == null || list.size() == 0) {
-					getNetworkState().setValue(Status.NONE);
-				} else {
-					getNetworkState().setValue(Status.SUCCESS);
-				}
 			}
 		});
 		getRefreshState().observe(this, new Observer<Status>() {

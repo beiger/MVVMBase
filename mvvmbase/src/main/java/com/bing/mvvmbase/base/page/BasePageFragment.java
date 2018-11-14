@@ -106,11 +106,6 @@ public abstract class BasePageFragment<AD extends PagedListAdapter, T> extends B
 			@Override
 			public void onChanged(PagedList<T> data) {
 				mAdapter.submitList(data);
-				if (data == null || data.size() == 0) {
-					getNetworkState().setValue(Status.NONE);
-				} else {
-					getNetworkState().setValue(Status.SUCCESS);
-				}
 			}
 		});
 		getNetworkState().observe(this, new Observer<Status>() {
