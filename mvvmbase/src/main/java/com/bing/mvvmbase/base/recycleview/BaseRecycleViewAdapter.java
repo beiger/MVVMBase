@@ -15,7 +15,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public abstract class BaseRecycleViewAdapter<T extends IsSame, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class BaseRecycleViewAdapter<T extends IsSame> extends RecyclerView.Adapter<BaseViewHolder> {
 	protected List<T> mData = new ArrayList<>();
 	protected OnClickListener mListener;
 
@@ -25,7 +25,7 @@ public abstract class BaseRecycleViewAdapter<T extends IsSame, VH extends BaseVi
 
 	@NonNull
 	@Override
-	public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+	public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		return createHolder(parent, viewType);
 	}
 
@@ -34,13 +34,13 @@ public abstract class BaseRecycleViewAdapter<T extends IsSame, VH extends BaseVi
 		return DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), layoutId, parent, false);
 	}
 
-	protected abstract VH createHolder(@NonNull ViewGroup parent, int viewType);
+	protected abstract BaseViewHolder createHolder(@NonNull ViewGroup parent, int viewType);
 
 	/**
 	 * 子类不用继承
 	 */
 	@Override
-	public void onBindViewHolder(@NonNull VH holder, final int position) {
+	public void onBindViewHolder(@NonNull BaseViewHolder holder, final int position) {
 		holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -53,7 +53,7 @@ public abstract class BaseRecycleViewAdapter<T extends IsSame, VH extends BaseVi
 		holder.mBinding.executePendingBindings();
 	}
 
-	protected abstract void bindData(VH holder, final int position);
+	protected abstract void bindData(BaseViewHolder holder, final int position);
 
 	@Override
 	public int getItemCount() {
