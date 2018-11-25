@@ -77,7 +77,7 @@ public abstract class BaseDataSource<K, T, TR> extends PageKeyedDataSource<K, T>
 				mInitialLoadState.postValue(Status.SUCCESS);
 
 				if (response == null || getDataFromResponse(response) == null) {
-					mNetworkState.postValue(Status.NONE);
+					mNetworkState.postValue(Status.EMPTY);
 				} else {
 					callback.onResult(getDataFromResponse(response), firstKey(), nextKey(firstKey(), response));
 				}

@@ -7,14 +7,9 @@ import android.view.ViewGroup;
 
 import com.bing.mvvmbase.R;
 import com.bing.mvvmbase.base.BaseFragment;
-import com.bing.mvvmbase.module.loadingpage.LoadingCallback;
-import com.bing.mvvmbase.module.loadingpage.NetErrorCallback;
-import com.bing.mvvmbase.module.loadingpage.NoDataCallback;
 import com.bing.mvvmbase.model.datawrapper.Status;
 import com.bing.mvvmbase.utils.DynamicTimeFormat;
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
+import com.bing.statuslayout.StatusLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -38,29 +33,25 @@ public abstract class BasePageFragment<AD extends PagedListAdapter, T> extends B
 	protected RefreshLayout mRefreshLayout;
 	protected ClassicsHeader mClassicsHeader;
 	protected AD mAdapter;
-	protected LoadService mLoadService;
+	protected StatusLayout mStatusLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false);
 		initView();
-		return mLoadService.getLoadLayout();
+		return mBinding.getRoot();
 	}
 
 	@Override
 	protected void initView() {
-		mLoadService = LoadSir.getDefault().register(mBinding.getRoot(), new Callback.OnReloadListener() {
-			@Override
-			public void onReload(View v) {
-				reload(v);
-			}
-		});
+		initStatusLayout();
 		initRefreshLayout();
 		initRefreshHeader();
 		initRecycleView();
 	}
 
-	protected abstract void reload(View view);
+	protected abstract void initStatusLayout();
+
 	protected void initRefreshLayout() {
 		mRefreshLayout = getRefreshLayout();
 		mRefreshLayout.setEnableLoadMore(false);
@@ -116,19 +107,23 @@ public abstract class BasePageFragment<AD extends PagedListAdapter, T> extends B
 				}
 				switch (status) {
 					case LOADING:
-						mLoadService.showCallback(LoadingCallback.class);
+						mStatusLayout.showViewByStatus(StatusLayout.STATUS_LOADING);
 						break;
 
 					case SUCCESS:
-						mLoadService.showSuccess();
+						mStatusLayout.showViewByStatus(StatusLayout.STATUS_CONTENT);
 						break;
 
 					case ERROR:
-						mLoadService.showCallback(NetErrorCallback.class);
+						mStatusLayout.showViewByStatus(StatusLayout.STATUS_ERROR);
 						break;
 
-					case NONE:
-						mLoadService.showCallback(NoDataCallback.class);
+					case EMPTY:
+						mStatusLayout.showViewByStatus(StatusLayout.STATUS_EMPTY);
+						break;
+
+					case NO_NETWORK:
+						mStatusLayout.showViewByStatus(StatusLayout.STATUS_NO_NETWORK);
 						break;
 
 					default:
