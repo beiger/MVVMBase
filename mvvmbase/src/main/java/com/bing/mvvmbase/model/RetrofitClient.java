@@ -20,12 +20,12 @@ public class RetrofitClient {
 
 	private RetrofitClient(String baseUrl) {
 		//声明日志类
-		Interceptor interceptor = new ChuckInterceptor(BaseApplication.getContext());
+		Interceptor interceptor = new ChuckInterceptor(BaseApplication.sContext);
 		//自定义OkHttpClient
 		OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
 		//添加拦截器
 		okHttpClient.addInterceptor(interceptor);
-		okHttpClient.cookieJar(new NovateCookieManager(new CookieCacheImpl(), new SharedPrefsCookiePersistor(BaseApplication.getContext())));
+		okHttpClient.cookieJar(new NovateCookieManager(new CookieCacheImpl(), new SharedPrefsCookiePersistor(BaseApplication.sContext)));
 
 		mRetrofit = new Retrofit.Builder()
 				.baseUrl(baseUrl) //设置网络请求的Url地址
