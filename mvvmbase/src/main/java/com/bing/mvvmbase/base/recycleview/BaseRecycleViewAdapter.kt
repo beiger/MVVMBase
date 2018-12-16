@@ -12,38 +12,40 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecycleViewAdapter<T : IsSame, VH: BaseViewHolder<*>> : RecyclerView.Adapter<VH>() {
-        open var mData: List<T>? = ArrayList()
-        open var mListener: OnClickListener? = null
-
-         fun setData(data: List<T>?) {
-                        if (data == null) {
+        var data: List<T>? = ArrayList()
+                set(data_temp: List<T>?) {
+                        if (data_temp == null) {
                                 return
                         }
-                        if (mData == null) {
-                                mData = data
-                                notifyItemRangeInserted(0, data.size)
+                        if (data == null) {
+                                data = data_temp
+                                notifyItemRangeInserted(0, data_temp.size)
                         } else {
                                 val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
                                         override fun getOldListSize(): Int {
-                                                return mData!!.size
+                                                return data!!.size
                                         }
 
                                         override fun getNewListSize(): Int {
-                                                return data.size
+                                                return data_temp.size
                                         }
 
                                         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                                                return mData!![oldItemPosition].itemSame(data[newItemPosition])
+                                                return data!![oldItemPosition].itemSame(data_temp[newItemPosition])
                                         }
 
                                         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                                                return mData!![oldItemPosition].contentSame(data[newItemPosition])
+                                                return data!![oldItemPosition].contentSame(data_temp[newItemPosition])
                                         }
                                 })
-                                mData = data
+                                data = data_temp
                                 result.dispatchUpdatesTo(this)
                         }
                 }
+
+        var listener: OnClickListener? = null
+
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
                 return createHolder(parent, viewType)
@@ -61,18 +63,18 @@ abstract class BaseRecycleViewAdapter<T : IsSame, VH: BaseViewHolder<*>> : Recyc
          */
         override fun onBindViewHolder(holder: VH, position: Int) {
                 holder.binding.root.setOnClickListener {
-                        if (mListener != null) {
-                                mListener!!.onClick(position)
+                        if (listener != null) {
+                                listener!!.onClick(position)
                         }
                 }
                 bindData(holder, position)
                 holder.binding.executePendingBindings()
         }
 
-        protected abstract fun bindData(holder: BaseViewHolder<*>, position: Int)
+        protected abstract fun bindData(holder: VH, position: Int)
 
         override fun getItemCount(): Int {
-                return mData!!.size
+                return data!!.size
         }
 
         interface OnClickListener {
