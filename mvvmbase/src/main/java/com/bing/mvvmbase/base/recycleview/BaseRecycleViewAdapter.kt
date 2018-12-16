@@ -11,7 +11,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecycleViewAdapter<T : IsSame> : RecyclerView.Adapter<BaseViewHolder<*>>() {
+abstract class BaseRecycleViewAdapter<T : IsSame, VH: BaseViewHolder<*>> : RecyclerView.Adapter<VH>() {
         protected var mData: List<T>? = ArrayList()
         protected var mListener: OnClickListener? = null
 
@@ -47,7 +47,7 @@ abstract class BaseRecycleViewAdapter<T : IsSame> : RecyclerView.Adapter<BaseVie
                         }
                 }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
                 return createHolder(parent, viewType)
         }
 
@@ -56,12 +56,12 @@ abstract class BaseRecycleViewAdapter<T : IsSame> : RecyclerView.Adapter<BaseVie
                 return DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutId, parent, false)
         }
 
-        protected abstract fun createHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*>
+        protected abstract fun createHolder(parent: ViewGroup, viewType: Int): VH
 
         /**
          * 子类不用继承
          */
-        override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
+        override fun onBindViewHolder(holder: VH, position: Int) {
                 holder.binding.root.setOnClickListener {
                         if (mListener != null) {
                                 mListener!!.onClick(position)

@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class BaseRecycleViewFragment<DB : ViewDataBinding, VM : BaseViewModel, AVM : BaseViewModel,  AD : BaseRecycleViewAdapter<T>, T : IsSame> : Fragment(), View.OnClickListener {
+abstract class BaseRecycleViewFragment<DB : ViewDataBinding, VM : BaseViewModel, AVM : BaseViewModel,  AD : BaseRecycleViewAdapter<T, *>, T : IsSame> : Fragment(), View.OnClickListener {
         lateinit var mBinding: DB
         lateinit var mViewModel: VM
         lateinit var mActivityViewModel: AVM
