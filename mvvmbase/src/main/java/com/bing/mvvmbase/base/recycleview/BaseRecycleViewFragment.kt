@@ -65,11 +65,14 @@ abstract class BaseRecycleViewFragment<DB : ViewDataBinding, VM : BaseViewModel,
 
         override fun onActivityCreated(savedInstanceState: Bundle?) {
                 super.onActivityCreated(savedInstanceState)
-                mActivityViewModel = ViewModelProviders.of(activity!!).get(mActivityViewModel.javaClass)
-                mViewModel = ViewModelProviders.of(this).get(mViewModel.javaClass)
+                initActivityViewModel()
+                initViewModel()
                 lifecycle.addObserver(mViewModel)
                 bindAndObserve()
         }
+
+        abstract fun initActivityViewModel()
+        abstract fun initViewModel()
 
         /**
          * 此时还没有viewModel

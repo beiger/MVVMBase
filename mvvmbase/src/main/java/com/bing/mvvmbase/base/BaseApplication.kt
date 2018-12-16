@@ -16,11 +16,11 @@ open class BaseApplication : Application() {
 
         override fun onCreate() {
                 super.onCreate()
-                sContext = applicationContext
+                sContext = this
                 Utils.init(this)
         }
 
         companion object {
-                lateinit var sContext: Context
+                lateinit var sContext: BaseApplication
         }
 }

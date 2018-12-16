@@ -8,7 +8,6 @@ import io.reactivex.disposables.Disposable
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
 
 abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(), View.OnClickListener {
         lateinit var mBinding: DB
@@ -19,7 +18,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompa
                 super.onCreate(savedInstanceState)
                 onCreateFirst()
                 mBinding = DataBindingUtil.setContentView(this, layoutId())
-                mViewModel = ViewModelProviders.of(this).get(mViewModel.javaClass)
+                initViewModel()
                 lifecycle.addObserver(mViewModel)
                 bindAndObserve()
         }
@@ -28,6 +27,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompa
 
         }
 
+        abstract fun initViewModel()
         abstract fun layoutId(): Int
         abstract fun bindAndObserve()
 

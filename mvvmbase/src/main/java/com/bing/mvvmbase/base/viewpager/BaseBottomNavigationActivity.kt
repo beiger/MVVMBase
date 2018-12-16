@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -29,7 +28,7 @@ abstract class BaseBottomNavigationActivity<DB : ViewDataBinding, VM : BaseViewM
                 super.onCreate(savedInstanceState)
                 onCreateFirst()
                 mBinding = DataBindingUtil.setContentView(this, layoutId())
-                mViewModel = ViewModelProviders.of(this).get(mViewModel.javaClass)
+                initViewModel()
                 lifecycle.addObserver(mViewModel)
                 initViewPagerAndBottomNav()
                 bindAndObserve()
@@ -40,6 +39,7 @@ abstract class BaseBottomNavigationActivity<DB : ViewDataBinding, VM : BaseViewM
         }
 
         protected abstract fun layoutId(): Int
+        abstract fun initViewModel()
 
         open fun initViewPagerAndBottomNav() {
                 mViewPager = viewpager()

@@ -19,7 +19,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.disposables.CompositeDisposable
@@ -47,7 +46,7 @@ abstract class BaseRecycleViewActivity<DB : ViewDataBinding, VM : BaseViewModel,
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
                 onCreateFirst()
-                mViewModel = ViewModelProviders.of(this).get(mViewModel.javaClass)
+                initViewModel()
                 lifecycle.addObserver(mViewModel)
                 mBinding = DataBindingUtil.setContentView(this, layoutId())
                 initStatusLayout()
@@ -61,6 +60,7 @@ abstract class BaseRecycleViewActivity<DB : ViewDataBinding, VM : BaseViewModel,
 
         }
 
+        abstract fun initViewModel()
         protected abstract fun layoutId(): Int
         protected abstract fun initStatusLayout()
 

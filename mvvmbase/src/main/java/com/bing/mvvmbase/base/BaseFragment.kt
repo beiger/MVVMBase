@@ -34,8 +34,8 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : BaseViewModel, AVM : Base
 
         override fun onActivityCreated(savedInstanceState: Bundle?) {
                 super.onActivityCreated(savedInstanceState)
-                mActivityViewModel = ViewModelProviders.of(activity!!).get(mActivityViewModel.javaClass)
-                mViewModel = ViewModelProviders.of(this).get(mViewModel.javaClass)
+                initActivityViewModel()
+                initViewModel()
                 lifecycle.addObserver(mViewModel!!)
                 bindAndObserve()
         }
@@ -47,6 +47,8 @@ abstract class BaseFragment<DB : ViewDataBinding, VM : BaseViewModel, AVM : Base
          * 此时还没有viewModel
          */
         abstract fun initView()
+        abstract fun initActivityViewModel()
+        abstract fun initViewModel()
         abstract fun bindAndObserve()
 
         fun addOnClickListener(vararg views: View) {
