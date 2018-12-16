@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecycleViewAdapter<T : IsSame, VH: BaseViewHolder<*>> : RecyclerView.Adapter<VH>() {
         var data: List<T>? = ArrayList()
-                set(data_temp) {
+
+        fun updateData(data_temp: List<T>?) {
                         if (data_temp == null) {
                                 return
                         }
