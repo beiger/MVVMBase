@@ -33,7 +33,7 @@ abstract class BasePageViewModel<K, T, TR, DS : BaseDataSource<K, T, TR>, DSF : 
 
         protected abstract fun initSourceFactory(): DSF
 
-        protected fun initPageConfig(): PagedList.Config {
+        open fun initPageConfig(): PagedList.Config {
                 return PagedList.Config.Builder()
                         .setEnablePlaceholders(false)
                         .setInitialLoadSizeHint(10)

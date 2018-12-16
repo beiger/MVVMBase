@@ -24,7 +24,7 @@ abstract class BasePagedListAdapter<T : IsSame, VH : BaseViewHolder<*>>(private 
         }
 
         // 在createHolder中使用
-        protected fun getBinding(parent: ViewGroup, viewType: Int, layoutId: Int): ViewDataBinding {
+        open fun getBinding(parent: ViewGroup, viewType: Int, layoutId: Int): ViewDataBinding {
                 return DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutId, parent, false)
         }
 

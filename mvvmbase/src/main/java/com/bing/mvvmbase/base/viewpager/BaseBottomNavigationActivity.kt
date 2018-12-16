@@ -37,13 +37,13 @@ abstract class BaseBottomNavigationActivity<DB : ViewDataBinding, VM : BaseViewM
                 bindAndObserve()
         }
 
-        protected fun onCreateFirst() {
+        open fun onCreateFirst() {
 
         }
 
         protected abstract fun layoutId(): Int
 
-        protected fun initViewPagerAndBottomNav() {
+        open fun initViewPagerAndBottomNav() {
                 mViewPager = viewpager()
                 mFragmentPagerAdapter = BaseFragmentPagerAdapter(supportFragmentManager, initFragments())
                 mViewPager.adapter = mFragmentPagerAdapter

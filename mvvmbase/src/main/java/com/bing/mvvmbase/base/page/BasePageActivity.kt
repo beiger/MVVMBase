@@ -59,7 +59,7 @@ abstract class BasePageActivity<DB : ViewDataBinding, VM : BaseViewModel, AD : P
                 bindAndObserve()
         }
 
-        protected fun onCreateFirst() {
+        open fun onCreateFirst() {
 
         }
 
@@ -67,7 +67,7 @@ abstract class BasePageActivity<DB : ViewDataBinding, VM : BaseViewModel, AD : P
         protected abstract fun layoutId(): Int
         protected abstract fun initStatusLayout()
 
-        protected fun initRefreshLayout() {
+        open fun initRefreshLayout() {
                 mRefreshLayout = refreshLayout
                 mRefreshLayout.setEnableLoadMore(false)
                 mRefreshLayout.setEnableOverScrollDrag(true)//是否启用越界拖动
@@ -76,12 +76,12 @@ abstract class BasePageActivity<DB : ViewDataBinding, VM : BaseViewModel, AD : P
 
         protected abstract fun refresh(refreshLayout: RefreshLayout)
 
-        protected fun initRefreshHeader() {
+        open fun initRefreshHeader() {
                 mClassicsHeader = mRefreshLayout.refreshHeader as ClassicsHeader
                 mClassicsHeader.setTimeFormat(DynamicTimeFormat(getString(R.string.refresh_at) + " %s"))
         }
 
-        protected fun initRecycleView() {
+        open fun initRecycleView() {
                 mRecyclerView = recyclerView
                 mRecyclerView.layoutManager = layoutManager
                 mRecyclerView.itemAnimator = itemAnimator

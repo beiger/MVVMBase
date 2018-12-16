@@ -1,9 +1,9 @@
-package com.bing.mvvmbase.model.datawrapper;
+package com.bing.mvvmbase.model.datawrapper
 
 /**
  * 数据请求状态
  */
-public enum  Status {
+enum class Status {
         SUCCESS,
         LOADING,
         EMPTY,

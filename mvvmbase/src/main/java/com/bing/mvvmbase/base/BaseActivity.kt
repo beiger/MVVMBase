@@ -26,7 +26,7 @@ abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompa
                 bindAndObserve()
         }
 
-        protected fun onCreateFirst() {
+        open fun onCreateFirst() {
 
         }
 
