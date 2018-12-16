@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecycleViewAdapter<T : IsSame, VH: BaseViewHolder<*>> : RecyclerView.Adapter<VH>() {
-        protected var mData: List<T>? = ArrayList()
-        protected var mListener: OnClickListener? = null
+        open var mData: List<T>? = ArrayList()
+        open var mListener: OnClickListener? = null
 
-        var data: List<T>?
-                get() = mData
-                set(data) {
+         fun setData(data: List<T>?) {
                         if (data == null) {
                                 return
                         }

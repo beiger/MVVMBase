@@ -14,7 +14,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
 
         override fun bindAndObserve() {
-
+                mBinding.isInitialized()
         }
 
         override fun onClick(v: View) {

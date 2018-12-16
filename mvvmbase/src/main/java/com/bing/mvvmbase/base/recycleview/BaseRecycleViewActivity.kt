@@ -89,7 +89,7 @@ abstract class BaseRecycleViewActivity<DB : ViewDataBinding, VM : BaseViewModel,
         protected abstract fun initAdapter()
 
         open fun bindAndObserve() {
-                data.observe(this, Observer { data -> mAdapter.data = data })
+                data.observe(this, Observer { data -> mAdapter.mData = data })
                 networkState.observe(this, Observer { status ->
                         if (status == null) {
                                 return@Observer
