@@ -129,7 +129,7 @@ abstract class BaseRecycleViewFragment<DB : ViewDataBinding, VM : BaseViewModel,
                                 }
                         }
                 })
-                data.observe(this, Observer { list -> mAdapter.mData = list })
+                data.observe(this, Observer { list -> mAdapter.data = list })
                 refreshState.observe(this, Observer { status ->
                         if (status != Status.LOADING) {
                                 mRefreshLayout.finishRefresh(status == Status.SUCCESS)
