@@ -9,7 +9,6 @@ import io.reactivex.disposables.Disposable
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application), DefaultLifecycleObserver {
         protected var mCompositeDisposable = CompositeDisposable()
-        protected var mAppExecutors = AppExecutors
 
         fun addDisposable(disposable: Disposable) {
                 mCompositeDisposable.add(disposable)

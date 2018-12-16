@@ -17,20 +17,18 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 abstract class BaseBottomNavigationActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(), View.OnClickListener {
-        val mBinding = lazy {
-                DataBindingUtil.setContentView(this, layoutId()) as DB
-        }
+        lateinit var mBinding:DB
         lateinit var mViewModel: VM
         val mCompositeDisposable = CompositeDisposable()
         lateinit var mViewPager: ViewPager
         lateinit var mFragmentPagerAdapter: FragmentPagerAdapter
-
 
         private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item -> navigationItemSelected(item) }
 
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
                 onCreateFirst()
+                mBinding = DataBindingUtil.setContentView(this, layoutId())
                 mViewModel = ViewModelProviders.of(this).get(mViewModel.javaClass)
                 lifecycle.addObserver(mViewModel)
                 initViewPagerAndBottomNav()

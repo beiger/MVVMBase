@@ -14,6 +14,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
 
         override fun bindAndObserve() {
+
         }
 
         override fun onClick(v: View) {

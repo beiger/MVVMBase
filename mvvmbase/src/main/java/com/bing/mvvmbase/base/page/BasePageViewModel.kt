@@ -16,18 +16,17 @@ abstract class BasePageViewModel<K, T, TR, DS : BaseDataSource<K, T, TR>, DSF : 
         protected var mCompositeDisposable = CompositeDisposable()
         lateinit var mSourceFactory: DSF
         lateinit var reviseList: LiveData<PagedList<T>>
-        protected var mAppExecutors = AppExecutors
         val networkState: LiveData<Status>
-                get() = Transformations.switchMap(mSourceFactory!!.sourceLiveData) { input -> input.networkState }
+                get() = Transformations.switchMap(mSourceFactory.sourceLiveData) { input -> input.networkState }
 
         val refreshState: LiveData<Status>
-                get() = Transformations.switchMap(mSourceFactory!!.sourceLiveData) { input -> input.initialLoadState }
+                get() = Transformations.switchMap(mSourceFactory.sourceLiveData) { input -> input.initialLoadState }
 
         fun initDataSource() {
                 mSourceFactory = initSourceFactory()
                 val pageConfig = initPageConfig()
-                reviseList = LivePagedListBuilder(mSourceFactory!!, pageConfig)
-                        .setFetchExecutor(mAppExecutors.networkIO)
+                reviseList = LivePagedListBuilder(mSourceFactory, pageConfig)
+                        .setFetchExecutor(AppExecutors.networkIO)
                         .build()
         }
 

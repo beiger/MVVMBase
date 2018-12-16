@@ -45,8 +45,6 @@ abstract class BaseRecycleViewAdapter<T : IsSame, VH: BaseViewHolder<*>> : Recyc
 
         var listener: OnClickListener? = null
 
-
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
                 return createHolder(parent, viewType)
         }

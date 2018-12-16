@@ -34,7 +34,7 @@ abstract class BaseRecycleViewActivity<DB : ViewDataBinding, VM : BaseViewModel,
         lateinit var mClassicsHeader: ClassicsHeader
         lateinit var mAdapter: AD
         lateinit var mStatusLayout: StatusLayout
-        protected abstract val refreshLayout: SmartRefreshLayout
+        abstract val refreshLayout: SmartRefreshLayout
 
         protected abstract val recyclerView: RecyclerView
         protected abstract val layoutManager: RecyclerView.LayoutManager

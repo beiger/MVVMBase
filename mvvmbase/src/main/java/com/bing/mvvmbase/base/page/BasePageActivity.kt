@@ -90,7 +90,7 @@ abstract class BasePageActivity<DB : ViewDataBinding, VM : BaseViewModel, AD : P
 
         protected abstract fun initAdapter()
 
-        protected fun bindAndObserve() {
+        protected open fun bindAndObserve() {
                 data.observe(this, Observer { data -> mAdapter!!.submitList(data) })
                 networkState.observe(this, Observer { status ->
                         if (status == null) {
