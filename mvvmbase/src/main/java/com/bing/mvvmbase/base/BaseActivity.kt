@@ -11,16 +11,14 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 
 abstract class BaseActivity<DB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(), View.OnClickListener {
-
-        val mBinding = lazy {
-                DataBindingUtil.setContentView(this, layoutId()) as DB
-        }
+        lateinit var mBinding: DB
         lateinit var mViewModel: VM
         var mCompositeDisposable = CompositeDisposable()
 
         override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
                 onCreateFirst()
+                mBinding = DataBindingUtil.setContentView(this, layoutId())
                 mViewModel = ViewModelProviders.of(this).get(mViewModel.javaClass)
                 lifecycle.addObserver(mViewModel)
                 bindAndObserve()
